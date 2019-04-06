@@ -1,0 +1,37 @@
+<!DUCTYPE HTML>
+<html>
+    <meta charset="utf-8">
+    <head>
+        <style>
+            html, body{
+                margin: 0;
+                height: 100%;
+            }
+            .main{
+                height: 100%;
+                margin: 0 210px;
+                background-color: aqua;
+            }
+            .left, .right{
+                width: 200px;
+                height: 100%;
+                top: 0; /*记得加top,不然会被挤到下面*/
+                position: absolute;
+                background-color: aquamarine;
+            }
+            .left{
+                left: 0;
+            }
+            .right{
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!--三栏布局，两端固定，中间自适应-->
+        <!--两端绝对定位，中间用margin隔开-->
+        <div class="main"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </body>
+</html>

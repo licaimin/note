@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .container{
+                height: 800px;
+                display: table;/*记得加这个*/
+                overflow: hidden;
+                
+            }
+            .container > div{
+                display: table-cell;
+              
+            }
+            .main{
+                width: 100%;
+                background-color: pink;
+            }
+            .left{
+                width: 200px;
+                height: 200px;;
+                min-width: 200px;/*这时候由于 middle 把两栏都给挤到两边去了，所以这时候我们要把两栏给挤回来，设置 min-width: 200px;*/
+                background-color: aquamarine;
+            }
+            .right{
+                min-width: 200px;
+                width: 200px;
+                height: 200px;
+                background-color: aquamarine;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+                <div class="left"></div>
+                <div class="main"></div>
+                <div class="right"></div>
+        </div>
+    <script></script>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .container{
+                overflow: hidden;
+                padding: 0 200px;
+                height: 800px;
+            }
+            .container > div{
+                position: relative;
+                float: left;
+                height: 100%;
+            }
+            .main{
+                width: 100%;
+                background-color:papayawhip;
+            }
+            .left{
+                width: 200px;
+                background-color: peachpuff;
+                margin-left: -100%;
+                left: -200px;
+            }
+            .right{
+                width: 200px;
+                background-color: peachpuff;
+                margin-left: -200px;
+                right: -200px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--拖到一定程度旁边两列会不见-->
+        <div class="container">
+            <div class="main"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+    <script></script>
+    </body>
+</html>

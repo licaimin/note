@@ -1,0 +1,205 @@
+下面就来一一介绍这 4 个标签。
+
+- `<i>` – 原本只是倾斜，现在用来体现一种“交替的声音”，通俗将就是==普通段落文字中文艺的或2B的文字==。像是外语（例如我经常写文章时混搭一些英文或日语）、科技术语（如超氧化物歧化酶SOD）或是用做排版的斜体文字。
+  ([W3C:Markup](http://dev.w3.org/html5/markup/i.html), [WHATWG](http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-i-element))
+
+- `<b>` – 原本就是加粗，现在表示“文体突出”文字，通俗将就是普通段落文字中突出不安分的文字。像是文档概要中的关键字，评论中的产品名。或者代表强调的排版方式。([W3C:Markup](http://dev.w3.org/html5/markup/b.html), [WHATWG](http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-b-element))
+
+- `<em>` – 原本表示强调，现在指有压力的强调。([W3C:Markup](http://dev.w3.org/html5/markup/em.html), [WHATWG](http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-em-element))(强调位置的不同通常会带来整个句子含义的变化)
+
+- `<strong>` – 原本表示更强强调，现指相当重要，基本上都是一样的。([W3C:Markup](http://dev.w3.org/html5/markup/strong.html), [WHATWG](http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-strong-element))(内容的重要性)
+
+- ### 三、详细
+
+  `<i>`和`<b>`都是文字样式元素，没有任何语义，就是用来控制文字的长相的，因此又称为表象元素，是一度不推荐使用的标签。如今，这两个元素有了语义，但是，它们的样式又能被CSS改变。像是`<b>`元素，并不是非得是加粗。正因如此，**推荐使用类名来表示其含义**以便日后可以轻松改变其样式。
+
+  **i元素**
+
+  正如概要提到的，语义化的`<i>`元素可以用来表示：外文单词、生物分类、科技术语、船名、剧本舞台方位、乐谱、三个代表思想或手写文字。
+
+  下面开始示例。
+
+  一段剧本，引用如下：
+
+  > **尔康：**紫薇，快走，快离开，容嬷嬷要来了！！
+  >
+  > *紫薇依依不舍离开尔康的房间……*
+  >
+  > **尔康：***好了，终于把粘人的紫薇给弄走了，接下来就是二人独处的大好时光了！*
+  >
+  > **尔康：**琪琪，你可以从衣柜里出来了。
+
+  上面就使用了`<i class="voiceover">`来表示话外音，以反映尔康内心少女般的情怀。
+
+  还是剧本节选，引用如下：
+
+  > **永琪：**尔康，不要，不要啊，*やめて*(雅蠛蝶)！
+
+  使用`<i lang="ja-latn">やめて</i>`来表明“不同语言”。
+
+  > **皇阿玛：**紫薇，这是使用天山雪域*红景天*熬的粥，你有没有听过“相宜本草，红景天幼白系列，以红，养白”。来，多吃点！
+
+  使用`<i class="taxonomy">红景天</i>`表示分类名。
+
+  `<i>`的使用是最为淡定的——像`<em>`为压力强调文字，`<strong>`为重要文字，`<cite>`为引用或文献目录，`<dfn>`为定义单词，`<var>`为数学变量。记住，在使用`<i>`的使用，最好使用`class`属性让人知道为什么这个元素要被使用。对了，上面语言`lang`属性元素可以使用`[lang="ja-latn"]`选择器进行样式定义。
+
+  **b元素**
+  W3C草案引用如下：
+
+  > The `<b>` element represents a span of text offset from its surrounding content without conveying any extra importance; for example, keywords in a document abstract, product names in a review, or other spans of text whose typical typographic presentation is bold text.
+  >
+  > [W3C specification](http://dev.w3.org/html5/markup/b.html)
+
+  `<b>`和`<i>`一直都是一路货色。在我看来，虽然在HTML5中这两个元素被赋予的语义，但是却是下等人的感觉，专干一般人不干的杂活。
+
+  上面[第一个例子](https://www.zhangxinxu.com/wordpress/2011/11/i-b-em-strong-html5-%e8%af%ad%e4%b9%89/#tagb)中的人名（尔康），就是使用的`<b>`标签，`<b class="character">尔康</i>`用来表示人物。
+
+  `<b>`元素该在什么地方使用呢？就是下面这些元素都不适合的时候：表重要的**<strong>**，表强调的`<em>`，表标题的`<h1>–<h6>`，表高亮或标记文本的`<mark>`等。
+
+  `<b>`元素就像是三国杀五谷丰登中最后一位拿牌的人, sign~~
+
+  **em元素**
+  W3C草案引用如下：
+
+  > The em element represents a span of text with emphatic stress.
+  >
+  > [W3C specification](http://dev.w3.org/html5/markup/em.html)
+
+  em元素过去就是强调的意思。在HTML5中的释义总有一个名为”stress”的单词伴随左右。”stress”其实也是强调的意思，我为了有所区分，就翻译成本意“压力”的意思。用在语句某个单词上来改变句子的侧重。举例说明：
+
+  > *紫薇晕倒……*
+  >
+  > **皇阿玛：**立即给我传*太医*。
+
+  上面皇阿玛台词中，强调的是“太医”(太医被em标签包裹)，要传的是太医，不是紫薇的心上人尔康。
+
+  > *紫薇晕倒……*
+  >
+  > **皇阿玛：***立即*给我传太医。
+
+  而这里，“立即”被`em`包裹，说明强调的是时间的及时性，耽误1分钟我都要你们的脑袋。
+
+  **strong元素**
+  W3C草案引用如下：
+
+  > The strong element represents a span of text with strong importance.
+  >
+  > [W3C specification](http://dev.w3.org/html5/markup/strong.html)
+
+  这个元素真没什么好说的，HTML4跟HTML5有什么差异吗？我是没看出来。我们可以嵌套使用`<strong>`和`<em>`元素来表示相对重要性。
+
+> 
+
+```html
+// 分类学名称
+<p>The <i class="taxonomy">Felis silvestris catus</i> is cute.</p>
+
+// 术语
+<p>The term <i>prose content</i> is defined above.</p>
+
+// 外语习语
+<p>There is a certain <i lang="fr">je ne sais quoi</i> in the air.</p>
+```
+
+## 
+
+```html
+// 下面的 b 元素起到突出关键词的作用，但不具备强调重要性的作用
+<p>The <b>frobonitor</b> and <b>barbinator</b> components are fried.</p>
+
+// 下面的 b 元素让被包围的词特殊化
+<p>You enter a small room. Your <b>sword</b> glows
+brighter. A <b>rat</b> scurries past the corner wall.</p>
+
+// 下面的 b 元素标注了文章的导语
+<article>
+  <h2>Kittens 'adopted' by pet rabbit</h2>
+  <p><b class="lede">Six abandoned kittens have found an
+    unexpected new mother figure — a pet rabbit.</b></p>
+  <p>Veterinary nurse Melanie Humble took the three-week-old
+    kittens to her Aberdeen home.</p>
+  ...
+</article>
+```
+
+## **<em>**
+
+> em 元素代表对其==内容的强调==
+
+强调位置的不同通常会带来整个句子含义的变化。看下面举的例子：
+
+```html
+// 这是一句不带任何强调的句子
+<p>Cats are cute animals.</p>
+
+// em 包围 Cats，强调猫是种可爱的动物，而不是狗或者其他动物
+<p><em>Cats</em> are cute animals.</p>
+
+// em 包围 are，代表句子所说是事实，来反驳那些说猫不可爱的人
+<p>Cats <em>are</em> cute animals.</p>
+
+// em 包围 cute，强调猫是一种可爱的动物，而不是有人说的刻薄、讨厌的动物
+<p>Cats are <em>cute</em> animals.</p>
+
+// 这里强调猫是动物，而不是植物
+<p>Cats are cute <em>animals</em>.</p>
+```
+
+## **<strong>**
+
+> strong 元素代表内容的==强烈的重要性、严重性或者紧急性==。
+
+**重要性**
+
+<strong> 元素可以被用在标题（heading）、说明（caption）或者段落（paragraph）上，来显示这部分被包围的文字的重要性。
+
+```html
+// 章节序号不重要，章节的名字才重要
+<h1>Chapter 1: <strong>The Praxis</strong></h1>
+```
+
+**严重性**
+
+<strong> 元素可以被用来标记警告或者警示标志。
+
+```html
+<p><strong>Warning.</strong> This dungeon is dangerous.</p>
+```
+
+**紧急性**
+
+<strong> 元素可以被用来表示需要被尽快看见的部分。
+
+需要注意的是，<strong> 元素仅仅对文本内容的重要性、严重性或紧急性产生作用，而不像 <em> 对句子含义进行改变。
+
+```html
+<p>Welcome to Remy, the reminder system.</p>
+<p>Your tasks for today:</p>
+<ul>
+ <li><p><strong>Turn off the oven.</strong></p></li>
+ <li><p>Put out the trash.</p></li>
+ <li><p>Do the laundry.</p></li>
+</ul>
+```
+
+## **小结**
+
+根据规范来看，em和strong的语义情景很明显，b和i的理解还是有些晦涩，个人的理解是：
+
+1、em会对文本含义有改变作用，类似读一句话时重读某一个字或词会表达不一样的意思一样。
+
+2、strong会突出包含文本的重要性、严重性和紧急性等。
+
+3、i标签为了表示不同语态或特性的文本，有点像文字排版里面的那些用斜体表示的内容（技术术语、外语习语这些排版会有不同的内容）。
+
+4、b标签主要是为了突出显示关键词、产品名称等；
+
+b标签的语义规范也是很模糊，所以也是不太建议用。文本标记使用==mark==标签。
+
+### mark
+
+<mark> 元素用于==高亮==文本
+
+(浏览器通常为黄色)
+
+这个 *HTML mark* 标签代表突出显示的文字,例如可以为了**标记**特定上下文中的文本而使用这个标签**.** 举个例子，它可以用来显示==搜索引擎搜索后关键词==。

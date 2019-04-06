@@ -1,0 +1,362 @@
+<<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+</head>
+<body>
+    <!-- <div class="box2"></div>
+    <div class="translatex">transform:translatex(100px);</div> -->
+
+        <button id="btn" >节流 </button>
+        <button id="btn1" >节流-时间戳 </button>
+        <button id="btn2" >节流-定时器 </button>
+        <button id="btn3">节流-时间戳加定时器</button>
+        <button id="btn4">防抖</button>
+        <div style="height:5000px">
+            
+                <div id="demo" style="position:fixed;"></div>
+            </div>
+
+           
+<script>
+    // 这个是用来获取当前时间戳的
+function now() {
+  return +new Date()
+}
+// 这个是用来获取当前时间戳的
+function now() {
+  return +new Date()
+}
+/**
+ * 防抖函数，返回函数连续调用时，空闲时间必须大于或等于 wait，func 才会执行
+ *
+ * @param  {function} func        回调函数
+ * @param  {number}   wait        表示时间窗口的间隔
+ * @param  {boolean}  immediate   设置为ture时，是否立即调用函数
+ * @return {function}             返回客户调用函数
+ */
+// func是用户传入需要防抖的函数
+// wait是等待时间
+const debounce3 = (func, wait = 50) => {
+  // 缓存一个定时器id
+  let timer = 0
+  // 这里返回的函数是每次用户实际调用的防抖函数
+  // 如果已经设定过定时器了就清空上一次的定时器
+  // 开始一个新的定时器，延迟执行用户传入的方法
+  return function(...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, wait)
+  }
+}
+window.onscroll = debounce(function(){
+    let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+console.log('滚动条位置：' + scrollTop);
+    }
+,800,false);
+// 不难看出如果用户调用该函数的间隔小于wait的情况下，上一次的时间还未到就被清除了，并不会执行函数
+
+function debounce (func, wait , immediate) {
+  let timer, context, args;
+
+  // 延迟执行函数
+  const later = () => setTimeout(() => {
+    // 延迟函数执行完毕，清空缓存的定时器序号
+    timer = null
+    // 延迟执行的情况下，函数会在延迟函数中执行
+    // 使用到之前缓存的参数和上下文
+    if (!immediate) {
+      func.apply(context, args)
+      context = args = null
+    }
+  }, wait)
+
+  // 这里返回的函数是每次实际调用的函数
+  return function(...params) {
+    // 如果没有创建延迟执行函数（later），就创建一个
+    if (!timer) {
+      timer = later()
+      // 如果是立即执行，调用函数
+      // 否则缓存参数和调用上下文
+      if (immediate) {
+        func.apply(this, params)
+      } else {
+        context = this
+        args = params
+      }
+    // 如果已有延迟执行函数（later），调用的时候清除原来的并重新设定一个
+    // 这样做延迟函数会重新计时
+    } else {
+      clearTimeout(timer)
+      timer = later()
+    }
+  }
+}
+        
+// window.onscroll = debounce(function () {
+//     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//     console.log('滚动条位置：' + scrollTop);
+// },1000,true)
+
+
+
+  function debounce2(func,wait){
+      let timer;
+      timer = null;
+      return(...args)=> {
+        if(timer){
+          clearTimeout(timer);
+      }
+          timer = setTimeout(()=>{
+              func.apply(this,args);
+          },wait)
+      }
+  }
+function throttle(func, wait){
+    let timer,start;
+    let args = arguments;
+    return function loop (){
+        let now = Date.now();
+        let self = this;
+        if(!start){
+        start = now;
+    }
+        if(timer){
+        clearTimeout(timer);
+    }
+        if(now - start >= wait){
+        func.apply(self,args);
+        start = now;
+     }else{
+         console.log('执行');
+        timer = setTimeout(()=>{
+            loop.apply(self,args);
+        },wait);
+    }
+    }
+   
+}
+//试验代码
+// function app(){
+//     var a = Date.now();
+//     console.log('a', a);
+// }
+// var btn1 = document.getElementById('btn1');
+// btn1.onclick= app;
+
+
+//节流throttle代码（时间戳,立即执行
+ function throttle1(func, delay) {            
+　　let prev = Date.now(); 
+console.log('prev',prev); 
+    console.log('时间戳'+ prev);      
+　　return function() {                
+　　　　var context = this;                
+　　　　var args = arguments;                
+　　　　var now = Date.now();       
+　　　　if (now - prev >= delay) {                    
+　　　　　　func.apply(context, args);                    
+　　　　　　prev = Date.now();                
+　　　　}            
+　　}        
+}        
+var count1 = 0;
+function handle1() {    
+    count1 ++;        
+　　console.log("时间戳按钮,count1");        
+}        
+// window.addEventListener('click', throttle1(handle, 1000));
+var btn1 = document.getElementById('btn1');
+btn1.onclick= throttle1(handle1, 800);
+
+
+// 节流throttle代码（定时器）忽略开始函数
+var throttle2 = function(func, delay) {            
+    var timer = null;            
+    return function() {                
+        var context = this;               
+        var args = arguments;               
+        if (!timer) {    
+            console.log(timer);                
+            timer = setTimeout(function() {                    
+                func.apply(context, args);                        
+                timer = null;                    
+            }, delay);                
+        }            
+    }        
+}        
+var count2 = 0;
+function handle2() {    
+    count2++;        
+    console.log("定时器按钮",count2);        
+}        
+var btn2 = document.getElementById('btn2');
+btn2.onclick= throttle2(handle2, 800);
+// window.addEventListener('scroll', throttle2(handle, 1000));
+//如果滚动条在中间，会
+
+//封装函数
+// function throttle5(func, wait){
+//     let timer, start;
+//     let args = arguments;
+//     return function loop(){
+//         let now = Date.now();
+//         let self = this;
+//         if(!start){
+//             start = now;
+//         }
+//         console.log(now - start);
+//         if(now - start >= wait){
+//             console.log('时间戳');
+//             func.apply(self, args);
+//             start = now;
+//         }else {
+//             timer = setTimeout(()=>{
+//                 console.log('定时器');
+//                 loop.apply(self,args);
+//             },wait);
+//         }
+//     }
+// }
+var throttle5 = function(func, delay) {     
+    var timer = null;     
+    var startTime = Date.now();     
+    return function() {             
+        var curTime = Date.now();             
+        var remaining = delay - (curTime - startTime);             
+        var context = this;             
+        var args = arguments;             
+        clearTimeout(timer);              
+        if (remaining <= 0) {                    
+            func.apply(context, args);                    
+            startTime = Date.now();              
+        } else {                    
+            timer = setTimeout(func, remaining);              
+        }      
+    }
+}
+var count3= 0;
+function handle3() {    
+    count3++;        
+    console.log("定时器+时间戳按钮",count3);        
+}  
+var btn3 = document.getElementById('btn3');
+btn3.onclick= throttle5(handle3, 800);
+/**
+ * underscore 节流函数，返回函数连续调用时，func 执行频率限定为 次 / wait
+ *
+ * @param  {function}   func      回调函数
+ * @param  {number}     wait      表示时间窗口的间隔
+ * @param  {object}     options   如果想忽略开始函数的的调用，传入{leading: false}。
+ *                                如果想忽略结尾函数的调用，传入{trailing: false}
+ *                                两者不能共存，否则函数不能执行
+ * @return {function}             返回客户调用函数
+ */
+const throttle4 = function(func, wait,options){
+    let args ,context , previous, result;
+    let timer = null;
+    previous = 0;
+    if(!options){
+        options = {};
+    }
+    const later= ()=>{
+        previous = options.leading === false? 0 : Date.now;
+        timer = null;
+        result = func.apply(context, args);
+        if(!timer){
+            context = args = null;
+        } 
+    }
+    return function(){
+        let now = Date.now();
+        context = this;
+        args = arguments;
+        if(!previous && options.leading === false){
+            previous = now;
+        }
+        let maining = wait - (now -previous);
+        if(maining < 0 || maining >= wait){
+            result = func.apply(context, args);
+            previous = now;
+            if(!timer){
+                clearTimeout(timer);
+                timer = null;
+                context = args = null;
+            }
+            
+        }else if(!timer && options.trailing !== false){
+            timer = setTimeout(later, maining);
+        }
+    }
+    return result;
+}
+
+var btn = document.getElementById( 'btn');
+var count = 0;
+// btn.onclick = debounce(function () {
+//     count++;
+//     console.log('开始按钮',count);
+// },800,false);
+btn.onclick = throttle4(function () {
+    count++;
+    console.log(Date.now())
+    console.log('开始按钮',count);
+},800,{trailing: true});
+// window.onscroll = throttle(function () {
+//     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//     console.log('滚动条位置：' + scrollTop);
+// },800)
+// window.onscroll = throttle(function () {
+//     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//     console.log('滚动条位置：' + scrollTop);
+// },800)
+// window.onscroll = throttle4(function () {
+//     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//     console.log('滚动条位置：' + scrollTop);
+// },800,{leading: true});
+//节流throttle代码（时间戳
+//节流throttle代码（定时s器）
+// 节流throttle代码（时间戳+定时器）：
+
+//深浅拷贝
+function copy(oldObj, deep){
+    let newObj = typeof oldObj === Array? [] : {};
+    for(let key in oldObj){
+        let value = oldObj[key];
+        if(deep && typeof value === 'object' && value != null){
+            newObj[key] = copy(value, deep);
+        }else{
+            newObj[key] = value;
+        }
+    }
+    return newObj;
+}
+let obj = {
+    a: 1,
+    b: {c : 2}
+}
+let c = copy(obj, true);
+let d = copy(obj, false);
+obj.a = 'ss'; 
+obj.b.c = 'yy';
+console.log(obj,c, d);
+
+</script>
+<style>
+    .box{
+        height: 10000px;
+    }
+    .box2{
+        width: 200px;
+        height: 200px;
+        border: 1px solid red;
+        /*top: 50px;*/
+        transform: translateY(50px);
+    }
+    .translatex{transform:translatex(100px);border:1px solid #ab9595;width:300px;height:100px;background-color:#e3e2e0; padding:8px;}
+</style>
+</body>
+</html>
