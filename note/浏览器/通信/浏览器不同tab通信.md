@@ -152,9 +152,11 @@ setInterval(function() {
 
 坑三的赋值需要在 `beforeunload` 事件中 `window.opener.windowObjectReference = null`
 
-#### **postMessage API**
+#### **postMessage API**  
 
 这个解决方案最大的优点是可以安全地实现跨源通信，提供了一种受控机制来规避此限制，只要正确的使用，这种方法就很安全。
+
+**两个窗口能通信的前提是，一个窗口以iframe的形式存在于另一个窗口，或者一个窗口是从另一个窗口通过window.open()或者超链接的形式打开的（同样可以用window.opener获取源窗口）**；换句话说，你要交换数据，必须能获取目标窗口(target window)的引用，不然两个窗口之间毫无联系，想通信也无能为力。
 
 ```
 // otherWindow 其他窗口的一个引用，如上述 windowObjectReference
@@ -194,13 +196,54 @@ window.addEventListener("message", function (e) {
 
 **PS：** 需要特别注意一点，应用该方法时，**一定要对 event.origin 进行过滤**，具体可以参考 [MDN](https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FAPI%2FWindow%2FpostMessage)。
 
-#### **cookies**
+#### **cookies**(一定要同源) document.cookie
 
 cookies 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。
 
 用它来完成跨标签页通信，其实和 `window.name` 的应用方法差不多，在实际场景中 cookies 中保存着 session 、token 等登陆信息，一般不建议用来通信，可以用来父页面和子页面共享登陆信息。
 
+当服务端没有设置 cookie 为 HttpOnly 时，可以在浏览器端设置和访问 cookie，而 cookie 本质上是服务器发送到用户浏览器并保存在浏览器上的一块数据，同源的文档可以访问 cookie
+
+修改 index1.html
+
+```
+...
+<body>
+    index1
+    <button id='newWindow'>new Tab</button>
+    <script>
+        const newWBtn = document.getElementById('newWindow')
+        newWBtn.addEventListener('click', () => {
+            document.cookie = 'name=test'
+            window.open(`${document.origin}/index2.html`)
+        })
+    </script>
+</body>
+...
+```
+
+修改 index2.html
+
+```
+...
+<body>
+    index2
+    <script>
+        console.log(document.cookie)
+    </script>
+</body>
+...
+```
+
+可以看到在 index2.html 的控制台中打印出了信息 'name=test'
+
+通过 cookie 进行跨文档通信，就像同源文档访问同一个对象
+
+
+
 #### **localStorage**
+
+#### setItem getItem  window.onstorage
 
 `localStorage` 需要结合 `window.onstorage` 就是，父页面修改 `localStorage`，子页面能够监听到它的变化。
 
