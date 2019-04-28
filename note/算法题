@@ -1,0 +1,36 @@
+给定二叉树和一个数sum，如果从树的根开始到叶节点的值等于sum，则返回true。 如果没有找到这样的路径，则返回false。
+
+
+
+例如， 
+在上述树根到叶节点存在具有以下和。
+
+21 - > 10 - 8 - 3 
+23 - > 10 - 8 - 5 
+14 - > 10 - 2 - 2
+
+因此，返回的值应该只对数字21，23和14. true。对于任何其他数字，返回值应该为false。
+
+```
+ boolean haspathSum(Node node, int sum) 
+    {
+        if (node == null)
+            return (sum == 0);
+        else
+        {
+            boolean ans = false;
+
+            /* otherwise check both subtrees */
+            int subsum = sum - node.data;
+            if (subsum == 0 && node.left == null && node.right == null)
+                return true;
+            if (node.left != null)
+                ans = ans || haspathSum(node.left, subsum);
+            if (node.right != null)
+                ans = ans || haspathSum(node.right, subsum);
+            return ans;
+        }
+    }
+
+```
+
