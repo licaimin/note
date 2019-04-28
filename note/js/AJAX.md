@@ -46,12 +46,36 @@ function ajaxRequest() {
          if(xhr.readyState === 4 &&xhr.status == 200){
              console.log(xhr.responseText)
          }else {
-             console.log(new Error(xhr.status))
+             console.log(new Error(xhr.status)) 
          }
      }
 }
 
 ```
+> 注意
+>
+> else
+>
+> 输出错误是在xhr.satus里
+>
+> ```
+>  if(xhr.readyState == 4){
+>             if(xhr.status == 200){
+>               console.log(xhr.responseText)
+>             }else{
+>             console.log('服务器错误')
+>           }
+>           }else{
+>             console.log('查看数据',xhr.readyState)
+>           }
+> ```
+>
+> 输出的是 
+>
+> 查看数据 2
+> 查看数据 3
+> test（这个是xhr.responseText）
+
 # axios
 
 vue2.0之后，就不再对vue-resource更新，而是推荐使用axios。基于 Promise 的 HTTP 请求客户端，可同时在浏览器和 Node.js 中使用。

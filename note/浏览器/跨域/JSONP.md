@@ -61,10 +61,22 @@ alert("success");
 
 ### 补充：vs 启动本地服务器
 
+==记得现在自己的文件夹进行初始化==`npm init -y`
+
 ```
 1、安装npm install -g live-server或者cnpm install live-server -gf 
 2、再运行live-server就可以在http://127.0.0.1:8080访问 
 ```
+
+然后在package.json
+
+```
+"scripts": {
+  "server": "live-server ./ --port=9090"
+}
+```
+
+
 
 OK，我们接下来应该改下sample.html里的代码，因为test.js文件在B程序上了，url也就变成了localhost:20002。
 
