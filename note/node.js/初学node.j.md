@@ -1,3 +1,7 @@
+#### 跨域
+
+
+
 ```
 http.createServer(function(request,response){
  response.setHeader('Access-Control-Allow-Origin','*');
