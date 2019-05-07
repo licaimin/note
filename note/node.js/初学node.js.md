@@ -189,3 +189,21 @@ fs.rename('旧文件.txt', '新文件.txt', (err) => {
 });
 ```
 
+### 响应内容类型Content-Type
+
+```
+response.setHeader('Content-Type','text/plain;charset=UTF-8');
+ response.end('中文')
+```
+
+即把 响应里 的 "中文" 当做plain即普通文本处理
+
+```
+response.setHeader('Content-Type','text/html;charset=UTF-8');
+ response.end('中文')
+```
+
+这个就当做html处理
+
+> <https://tool.oschina.net/commons>  HTTP-mime-type 查找对应的格式需要的请求头的content-type
+
