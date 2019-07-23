@@ -1,0 +1,125 @@
+# url
+
+[阮一峰链接](![1562747827548](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1562747827548.png))
+
+：；/?@+=&$,#
+
+**七、Javascript函数：encodeURI()**
+
+encodeURI()是Javascript中真正用来对URL编码的函数。
+
+它着眼于对整个URL进行编码，因此除了常见的符号以外，对其他一些在网址中有特殊含义的符号"; / ? : @ & = + $ , #"，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
+
+![bg2010021113.png](http://www.ruanyifeng.com/blog/upload/2010/02/bg2010021113.png)
+
+它对应的解码函数是decodeURI()。
+
+![bg2010021114.png](http://www.ruanyifeng.com/blog/upload/2010/02/bg2010021114.png)
+
+需要注意的是，它不对单引号'编码。
+
+**八、Javascript函数：encodeURIComponent()**
+
+最后一个Javascript编码函数是encodeURIComponent()。与encodeURI()的区别是，它用于对URL的组成部分进行个别编码，而不用于对整个URL进行编码。
+
+因此，"; / ? : @ & = + $ , #"，这些在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码。至于具体的编码方法，两者是一样。
+
+![bg2010021115.png](http://www.ruanyifeng.com/blog/upload/2010/02/bg2010021115.png)
+
+它对应的解码函数是decodeURIComponent()。
+
+# 一张图看懂encodeURI、encodeURIComponent、decodeURI、decodeURIComponent的区别
+
+*早前在博客园发的几篇基础文，都是图解系列，总结了一些JavaScript容易混淆的知识点，现在拿来在掘金分享一下吧。*
+
+原文地址：[一张图看懂encodeURI、encodeURIComponent、decodeURI、decodeURIComponent的区别](https://link.juejin.im/?target=http%3A%2F%2Fshuiyi.io%2Farticle%2F6)
+
+## 1、这四个方法的用处
+
+### 用来编码和解码URI的
+
+统一资源标识符，或叫做 URI，是用来标识互联网上的资源（例如，网页或文件）和怎样访问这些资源的传输协议（例如，HTTP 或 FTP）的字符串。除了encodeURI、encodeURIComponent、decodeURI、decodeURIComponent四个用来编码和解码 URI 的函数之外 ECMAScript 语言自身不提供任何使用 URL 的支持。
+
+## 2、URI组成形式
+
+一个 URI 是由组件分隔符分割的组件序列组成。其一般形式是：
+*Scheme* : *First* / *Second* ; *Third* ? *Fourth*
+
+其中斜体的名字代表组件；“:”, “/”, “;”，“?”是当作分隔符的**保留字符**。
+
+## 3、有和不同？
+
+[encodeURI](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23encodeURI) 和 [decodeURI](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23decodeURI) 函数操作的是完整的 URI；这俩函数假定 URI 中的任何保留字符都有特殊意义，所有不会编码它们。
+
+[encodeURIComponent](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23encodeURIComponent) 和 [decodeURIComponent](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23decodeURIComponent) 函数操作的是组成 URI 的个别组件；这俩函数假定任何保留字符都代表普通文本，所以必须编码它们，所以它们（保留字符）出现在一个完整 URI 的组件里面时不会被解释成保留字符了。
+
+以上说明摘自[ECMAScript标准](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23.E5.A4.84.E7.90.86_URI_.E7.9A.84.E5.87.BD.E6.95.B0.E5.B1.9E.E6.80.A7)，为了容易读懂做了点编辑加工。
+
+## 4、图解四个函数的不同
+
+ECMA对这四个函数还做了[详细解释](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23.E5.A4.84.E7.90.86_URI_.E7.9A.84.E5.87.BD.E6.95.B0.E5.B1.9E.E6.80.A7)，可能是为了写的更逻辑化一些，采用了类似变量配合逻辑的写法来说明，但是让初学者看得云里雾里的特别绕，所以有必要把它写得更像是人读的东西……
+
+
+
+![img](https://lc-gold-cdn.xitu.io/6f5dace798f2d7763cc9.png?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)图解转义与反转义URI的四种方法
+
+
+
+当 URI 里包含一个没在上面列出的字符或有时不想让给定的保留字符有特殊意义，那么必须编码这个字符。字符被转换成 UTF-8 编码，首先从 UTF-16 转换成相应的代码点值的替代。然后返回的字节序列转换为一个字符串，每个字节用一个“%xx”形式的转移序列表示。（具体转换规则可以参考[抽象操作**Encode**和**Decode**的说明](https://link.juejin.im/?target=https%3A%2F%2Fwww.w3.org%2Fhtml%2Fig%2Fzh%2Fwiki%2FES5%2F%E6%A0%87%E5%87%86_ECMAScript_%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%23x15.1.3.1)）
+
+# 浏览器
+
+于navigator对象中与语言相关的属性直接的差异
+
+- language                      当前浏览器语言
+
+- userLanguage              当前操作系统设定的自然语言
+
+- browserLanguage        当前浏览器的语言
+
+- systemLanguage          当前操作系统的语言
+
+  
+
+这几个返回值在各大浏览器：
+
+
+
+代码中打印出了各浏览器对于这 4 个属性返回值的情况：
+
+|                           | IE6 IE7 IE8 | Firefox Chrome Safari |   Opera   |
+| :-----------------------: | :---------: | :-------------------: | :-------: |
+|    navigator.language     |  undefined  |         zh-CN         |   zh-CN   |
+|  navigator.userLanguage   |    zh-cn    |       undefined       |   zh-cn   |
+| navigator.browserLanguage |    zh-cn    |       undefined       |   zh-cn   |
+| navigator.systemLanguage  |    zh-cn    |       undefined       | undefined |
+
+```
+function getLang (hrefLang) {
+  let lang = (
+    hrefLang ||
+    navigator.language ||
+    navigator.browserLanguage ||
+    'en-US'
+  ).split(/-|_/)[0] // 先取url,取不到就取本地的浏览器
+
+  return lang
+}
+```
+
+```
+文中截取lang的前2位字符，是因为浏览器语言返回值可能是：
+zh-cn Chinese(PRC) 
+
+zh-tw Chinese(Taiwan Region)
+
+zh-hk Chinese(Hong Kong SAR, PRC) 
+
+zh-sg Chinese(Singapore) 
+
+en-us English(United States) 
+
+en     English
+
+```
+

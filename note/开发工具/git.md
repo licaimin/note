@@ -15,3 +15,19 @@ git是分布式，与svn集中式不同
 git add  git commit  git push
 
 git branch 分支 git checkout
+
+1、原文链接，https://blog.csdn.net/taquguodedifang/article/details/77671058
+
+今天用git commit -m “注释”提交的时候，注释写错了，于是各种查资料开始了和git bash vim的纠缠。。。（网上的资料我真是没操作成功，不过最后还是摸索出来了。
+
+首先 使用 git commit --amend 命令（修改最近一次提交的注释信息），会进入到vim 编辑器
+
+然后 你会发现编辑器里你怎么输入都没反应，这是因为vim处在不可编辑状态，
+
+按下字母键 c（此时进入编辑状态），可以开始修改注释信息了
+
+修改好后，你会发现怎么都退出不了，然后如下操作：
+
+按下Esc (退出编辑状态)； 接着连按两次大写字母Z，你会惊喜的发现，终于保存好退出来了！
+
+ windows 系统 ，亲测有效！！拿走不谢！

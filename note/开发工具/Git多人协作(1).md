@@ -49,7 +49,7 @@ Host github.com
 4. 尝试下连接
 
 ```shell
-ssh -T git@git.shanyutech.net # 尝试连接
+    ssh -T git@git.shanyutech.net # 尝试连接
 ```
 
 ```shell

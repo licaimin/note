@@ -1,0 +1,58 @@
+[cookie](https://segmentfault.com/a/1190000004556040)
+
+```
+export function getCookie (name) {
+  const RE = new RegExp(`(^| )${name}=([^;]*)(;|$)`)
+  const arr = document.cookie.match(RE)
+  console.log(document.cookie)
+  console.log(arr)
+
+  if (arr) {
+    return unescape(arr[2])
+  }
+  return ''
+}
+
+```
+
+```
+hd_newui=0.43862099119189946; _ga=GA1.2.1680529057.1554279828; hagouid=8590001008; hiido_ui=0.7307020695691451; uaasCookie=YIlRM9VGDD7W6jlXg0tMoxJMk6OiOSxdi7LyIuztEMi4VLn4IkBcwQAp%2Fvh6UW64%2CnNM9ovMxw69OkKbKsRABElCLhJqdrpvVbHwvO%2Ft6Vopf6IwdY9KGP0zg9wBRt7BvlJk3THEoTEGXu5q%2ByH2PKr3Fd%2BtJVGecMGbifUM3O71IMZ3yW0pCM3%2BcQBM2GunWZrLjQSvhKiIb9AeJaDaB%2FrKYCOolODvbdxodpuaaNRepbza6460qkKy14kYyHSwMsIm9iXOeAWmT%2FGqLDhsh8%2FwRQsADqSe1YFNY6E8J5bsFFBaHtpxKwssg9lBGPzzOH8rF5arBHfmplFwgsyZCNyaOTia6wrbnfCBeK%2BQ2ubD0DhG%2FqYL6%2Bzk3YVjSwT8t
+index.js:5 (4) [" hagouid=8590001008;", " ", "8590001008", ";", index: 62, input: "hd_newui=0.43862099119189946; _ga=GA1.2.1680529057…yaOTia6wrbnfCBeK%2BQ2ubD0DhG%2FqYL6%2Bzk3YVjSwT8t", groups: undefined]
+```
+
+```
+(4) [" hagouid=8590001008;", " ", "8590001008", ";", index: 62, input: "hd_newui=0.43862099119189946; _ga=GA1.2.1680529057…yaOTia6wrbnfCBeK%2BQ2ubD0DhG%2FqYL6%2Bzk3YVjSwT8t", groups: undefined]
+```
+
+有空格？？？
+
+因为
+
+在设置这些属性时，属性之间由一个**分号**和一个**空格**隔开。代码示例如下：
+
+```
+"key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"
+```
+
+```
+
+/**
+ * 根据url，获取运行时环境信息
+ */
+function getEnv () {
+  let env = 'prod'
+  const host = location.host
+  if (/^dev/.test(host)) {
+    env = 'dev'
+  } else if (/^test/.test(host)) {
+    env = 'test'
+  } else {
+    env = 'prod'
+  }
+  console.log(env)
+  return env
+}
+
+```
+
+那localhost?
