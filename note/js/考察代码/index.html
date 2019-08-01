@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .line{
+      position: relative;
+    }
+    .line:after{
+      content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #000000;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    }
+    .throttle{
+      height: 2000px;
+      width: 100%;
+      border: 1px solid red
+    }
+  </style>
+</head>
+<body>
+  <div class="line"></div>
+  <button id='btn'>防抖</button>
+  <div class="throttle"></div>
+  <script>
+    //防抖
+    var debounce = function(fn,wait){
+      let timer = 0
+      return function(...args){
+        if(timer){
+          clearTimeout(timer)
+        }
+        timer = setTimeout(()=>{
+          fn.apply(this,args)
+        },wait)
+      }
+    }
+    var throttle = function (fn, delay, atleast) { var timer = null; var previous = null;
+
+return function () { var now = +new Date(); //注意是+Date()获取时间戳
+
+if ( !previous ) previous = now;
+
+ if ( now - previous > atleast ) {
+     fn();
+     // 重置上一次开始时间为本次结束时间  /
+     previous = now;
+ } else {
+     clearTimeout(timer);
+     timer = setTimeout(function() {        //这个其实就是防抖的逻辑，就最后一次的会触发
+         fn();
+     }, delay);
+ }
+} };
+    var btn = document.getElementById('btn')
+    btn.onclick = throttle(function(){
+      console.log('防抖')
+    },2000)
+    window.onscroll = throttle(function(){
+      console.log('节流')
+    },3000,3000)
+  </script>
+</body>
+</html>

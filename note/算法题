@@ -34,3 +34,31 @@
 
 ```
 
+## 2，解维
+
+```
+let time = 0
+function flat(arr) {
+  if (arr.length === 0 || !Array.isArray(arr)) return;
+  let containsArray = false;
+  let flag = 0
+  for (let i = flag; i < arr.length; i++) {
+    if (Array.isArray(arr[i])) {
+      containsArray = true;
+      let before = arr.slice(0, i);
+      let after = arr.slice(i + 1);
+			arr = before.concat(arr[i]).concat(after)
+			flag = i
+    }
+	}
+	
+  return containsArray ? flat(arr) : arr;
+}
+
+console.log(flat([[[[1],2]] ,[2,4],3]))
+//生成深度测试数组 用于验证爆栈
+let testArray = Array(100000).fill().map((d, i) => ([i])).reduce((acc, cur) => {
+    cur[1] = acc;
+    return cur;
+```
+

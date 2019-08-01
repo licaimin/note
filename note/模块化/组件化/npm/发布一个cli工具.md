@@ -12,3 +12,14 @@ bin目录下的cli.js
 
 可以在js中console.log('hello mei')
 
+https://juejin.im/post/5af2a2cbf265da0b9c109f59
+
+
+
+https://juejin.im/post/5b6b086cf265da0f8d368935
+
+使用`process.argv`获取完整的输入信息
+
+***commander***
+
+我们选用 *nodejs* 的 *commander* 来制作 类似 *git* *docker* 风格的 *cli* 命令行工具 ， 因为没有其他更好的选择
